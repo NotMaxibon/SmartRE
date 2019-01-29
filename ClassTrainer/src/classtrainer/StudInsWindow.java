@@ -17,6 +17,7 @@ public class StudInsWindow extends javax.swing.JFrame {
     private MainWindow mainWin;
     public StudInsWindow(MainWindow mw,Student student){
         mainWin = mw;
+        mainWin.setFocusableWindowState(false);
         this.setVisible(true);
         initComponents();
         jTextField1.setText(student.n);
@@ -25,6 +26,7 @@ public class StudInsWindow extends javax.swing.JFrame {
     }
     public StudInsWindow(MainWindow mw) {
         mainWin = mw;
+        mainWin.setFocusableWindowState(false);
         this.setVisible(true);
         initComponents();
     }
@@ -50,6 +52,11 @@ public class StudInsWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -70,6 +77,11 @@ public class StudInsWindow extends javax.swing.JFrame {
         jLabel3.setText("Directory(Student images):");
 
         jButton1.setLabel("Cancel");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         jButton2.setLabel("Apply");
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -156,6 +168,14 @@ public class StudInsWindow extends javax.swing.JFrame {
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
         FileSelect fileSel = new FileSelect(this);
     }//GEN-LAST:event_jButton3MouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        this.dispose();
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        mainWin.setFocusableWindowState(true);
+    }//GEN-LAST:event_formWindowClosing
     public void setDir(File d){
         jTextField3.setText(d.getAbsolutePath());
     }
