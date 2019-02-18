@@ -3,6 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 27
     defaultConfig {
+        vectorDrawables.useSupportLibrary = true
         applicationId "com.example.vcvyc.mtcnn_new"
         minSdkVersion 21
         targetSdkVersion 27

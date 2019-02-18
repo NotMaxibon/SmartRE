@@ -1,8 +1,8 @@
 package com.example.vcvyc.mtcnn_new;
 /* by cjf 1801615 352871242@qq.com*/
 /**
- * 人脸特征(512维特征值)
- * 相似度取特征向量之间的欧式距离.
+ * Face feature (512-dimensional feature value)
+ * Similarity takes the Euclidean distance between feature vectors.
  */
 public class FaceFeature {
     public static final int DIMS=512;
@@ -13,7 +13,7 @@ public class FaceFeature {
     public float[] getFeature(){
         return fea;
     }
-    //比较当前特征和另一个特征之间的相似度
+    //Compare the similarity between the current feature and another feature
     public double compare(FaceFeature ff){
         double dist=0;
         for (int i=0;i<DIMS;i++)

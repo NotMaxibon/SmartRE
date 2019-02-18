@@ -13,16 +13,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Vector;
+import java.util.List;
+
+import javax.xml.transform.Result;
 
 public class MainActivity extends AppCompatActivity {
+    private static final int NUM_IMGS = 5;
     String TAG="MainActivity";
     ImageView imageView;
+    Button RecBtn;
     Bitmap bitmap;
     TextView TextLog;
     private  Bitmap readFromAssets(String filename){
@@ -39,33 +46,56 @@ public class MainActivity extends AppCompatActivity {
         }
         return Utils.copyBitmap(bitmap); //Return mutable image
     }
-    FaceFeature ff;
-    Facenet fn;
+    Vector<Box> boxes;
     MTCNN mtcnn;
     public void processImage(){
         Bitmap bm= Utils.copyBitmap(bitmap);
         try {
-            Vector<Box> boxes=mtcnn.detectFaces(bm,40);
+            boxes=mtcnn.detectFaces(bm,40);
             for (int i=0;i<boxes.size();i++){
                 Utils.drawRect(bm,boxes.get(i).transform2Rect());
                 Utils.drawPoints(bm,boxes.get(i).landmark);
             }
-            fn.recognizeImage(bm);
             imageView.setImageBitmap(bm);
-            if(TextLog.getLineCount()>=10){
-                TextLog.clearComposingText();
-            }
-            TextLog.append("Loaded IMG/n");
         }catch (Exception e){
             Log.e(TAG,"[*]detect false:"+e);
         }
     }
     public void myMain(){
-        imageView =(ImageView)findViewById(R.id.imageView);
+        RecBtn = (findViewById(R.id.RecBtn));
+        imageView =(findViewById(R.id.imageView));
         bitmap=readFromAssets("inputBMP.JPG");
+        final String Filenames[] = {"Maximilian_Mastrogiacomo_001.jpeg","Riccardo_Pace_001.jpeg","Samuel_Leon_001.jpeg","Gianmarco_Boco_001.jpeg","Francesco_Natoli_001.jpeg"};
         TextLog = findViewById(R.id.TexLog);
         mtcnn=new MTCNN(getAssets());
         processImage();
+        TextLog.append("Loaded IMG");
+        RecBtn.setOnClickListener (new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                List<Double> results = new ArrayList();
+                AssetManager asm=getAssets();
+                Facenet fn = new Facenet(asm);
+                FaceFeature ffa = fn.recognizeImage(bitmap);
+                FaceFeature ffb;
+                for(int i=0;i<boxes.size();i++){
+                    for(String file : Filenames) {
+                        ffb = fn.recognizeImage(Utils.copyBitmap(readFromAssets(file)));
+                        results.add(ffa.compare(ffb));
+                    }
+                    double max=0;
+                    int ID=0;
+                    TextLog.setText("");
+                    for(int j=0;j< results.size();j++){
+
+                        TextLog.append(Integer.toString(j)+":"+Filenames[ID]+Double.toString(results.get(j))+"\n");
+                        ID++;
+                    }
+
+                }
+            }
+
+        });
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // TODO Auto-generated method stub

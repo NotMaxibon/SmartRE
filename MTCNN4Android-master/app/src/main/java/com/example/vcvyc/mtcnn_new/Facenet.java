@@ -24,7 +24,7 @@ import org.tensorflow.contrib.android.TensorFlowInferenceInterface;
 import java.io.IOException;
 import java.nio.IntBuffer;
 
-/**功能：人脸转换为512维特征向量
+/**Function: Face conversion to 512-dimensional feature vector
  */
 public class Facenet{
     private static final String MODEL_FILE  = "file:///android_asset/20180402-114759.pb";
@@ -32,10 +32,10 @@ public class Facenet{
     private static final String OUTPUT_NAME = "embeddings:0";
     private static final String PHASE_NAME  = "phase_train:0";
     private static final String[] outputNames = new String[] {OUTPUT_NAME};
-    //输入图片大小.(图片非此大小，会rescale)
+    //Enter the image size.
     private static final int INPUT_SIZE=160;
-    private float[] floatValues;  //保存input的值
-    private int[] intValues;      //像素值
+    private float[] floatValues;  //Save the value of input
+    private int[] intValues;      //Pixel values
     private AssetManager assetManager;
     private TensorFlowInferenceInterface inferenceInterface;
     Facenet(AssetManager mgr){
@@ -57,14 +57,16 @@ public class Facenet{
     }
     //Bitmap to floatValues
     private int normalizeImage(final Bitmap _bitmap){
-        // (0) bitmap缩放到INPUT_SIZE*INPUT_SIZE
+        // (0)
+        //Bitmap zoom to INPUT_SIZE*INPUT_SIZE
         float scale_width=((float)INPUT_SIZE)/_bitmap.getWidth();
         float scale_height=((float)INPUT_SIZE)/_bitmap.getHeight();
         Matrix matrix = new Matrix();
         matrix.postScale(scale_width,scale_height);
         Bitmap bitmap = Bitmap.createBitmap(_bitmap,0,0,_bitmap.getWidth(),_bitmap.getHeight(),matrix,true);
         //Log.d("Facenet","[*]bitmap size:"+bitmap.getHeight()+"x"+bitmap.getWidth());
-        // (1) 将像素映射到[-1,1]区间内
+        // (1)
+        //Map pixels to [-1,1]
         float imageMean=127.5f;
         float imageStd=128;
         bitmap.getPixels(intValues,0,bitmap.getWidth(),0,0,bitmap.getWidth(),bitmap.getHeight());
@@ -80,7 +82,8 @@ public class Facenet{
     }
     public FaceFeature recognizeImage(final Bitmap bitmap){
         //Log.d("Facenet","[*]recognizeImage");
-        //(0)图片预处理，normailize
+        //(0)
+        //Image preprocessing,normailize
         normalizeImage(bitmap);
         //(1)Feed
         try {
