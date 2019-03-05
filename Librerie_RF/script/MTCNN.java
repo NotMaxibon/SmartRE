@@ -1,4 +1,4 @@
-package com.example.vcvyc.mtcnn_new;
+
 /*
   MTCNN For Android
   by cjf@xmu 20180625

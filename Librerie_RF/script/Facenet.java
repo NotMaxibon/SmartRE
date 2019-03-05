@@ -1,4 +1,4 @@
-package com.example.vcvyc.mtcnn_new;
+
 
 import android.app.Activity;
 import android.content.res.AssetManager;

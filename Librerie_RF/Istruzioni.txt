@@ -1,0 +1,5 @@
+Mettere i contenuti di "asset" nella cartella asset del progetto.
+Mettere il contenuto degli "script" nella stessa cartella degli altri script del progetto,dopodichè potranno essere usati 
+dopo aver aggiunto "package nome.pacchetto.progetto;" in cima,
+se non sapete cosa scrivere dopo "packet" di solito potete copiare quello che sta scritto in cima alle altre classi del vostro progetto.
+Leggere i commenti in "MainActivity" e "Student" per informazioni e risoluzione di alcuni problemi(queste sono le uniche due classi che dovrebbero essere modificate)

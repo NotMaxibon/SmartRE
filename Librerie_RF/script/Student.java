@@ -1,4 +1,4 @@
-package com.example.vcvyc.mtcnn_new;
+
 
 import android.support.v7.app.AppCompatActivity;
 import android.graphics.Bitmap;

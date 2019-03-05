@@ -1,4 +1,4 @@
-package com.example.vcvyc.mtcnn_new;
+
 /* by cjf 1801615 352871242@qq.com*/
 
 import android.graphics.Bitmap;

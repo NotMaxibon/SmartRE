@@ -1,4 +1,4 @@
-package com.example.vcvyc.mtcnn_new;
+
 /* by cjf 1801615 352871242@qq.com*/
 /**
  * Face feature (512-dimensional feature value)
