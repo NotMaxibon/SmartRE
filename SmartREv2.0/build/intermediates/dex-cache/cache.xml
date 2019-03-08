@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="C:\Users\Maximilian\Documents\GitHub\SmartRE\SmartREv2.0\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.1.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="f02263e35e52668dd17b73bf961437e3d562b35f">
+        <dex dex="C:\Users\Maximilian\Documents\GitHub\SmartRE\SmartREv2.0\app\build\intermediates\pre-dexed\debug\com.android.support-support-media-compat-25.1.0_84273b33067c8d13e05d2b528b4cdd2156a81dbd.jar" />
+    </item>
+
+</items>
